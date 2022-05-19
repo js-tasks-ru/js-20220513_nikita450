@@ -4,6 +4,20 @@
  * @param {string} [param="asc"] param - the sorting type "asc" or "desc"
  * @returns {string[]}
  */
-export function sortStrings(arr, param = 'asc') {
 
+function compare(firstVal, secondVal) {
+  return firstVal.localeCompare(secondVal, 'ru', { caseFirst: 'upper' });
+}
+
+export function sortStrings(arr, param = 'asc') {
+  arr.sort((a, b) => {
+    if (param === 'asc') {
+      return compare(a, b);
+    }
+    if (param === 'desc') {
+      return compare(b, a);
+    }
+    return 0;
+  });
+  return arr;
 }
