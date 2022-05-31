@@ -6,18 +6,17 @@
  */
 
 function compare(firstVal, secondVal) {
-  return firstVal.localeCompare(secondVal, 'ru', { caseFirst: 'upper' });
+  return firstVal.localeCompare(secondVal, "ru", { caseFirst: "upper" });
 }
 
-export function sortStrings(arr, param = 'asc') {
-  arr.sort((a, b) => {
-    if (param === 'asc') {
+export function sortStrings(arr, param = "asc") {
+  return [...arr].sort((a, b) => {
+    if (param === "asc") {
       return compare(a, b);
     }
-    if (param === 'desc') {
+    if (param === "desc") {
       return compare(b, a);
     }
     return 0;
   });
-  return arr;
 }
