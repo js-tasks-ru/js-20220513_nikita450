@@ -1,19 +1,19 @@
 export default class ColumnChart {
-  subElements = {};
-  chartHeight = 50;
+  subElements = {}
+  chartHeight = 50
 
   constructor({
     data = [],
-    label = "",
-    link = "",
+    label = '',
+    link = '',
     value = 0,
     formatHeading = (data) => data,
   } = {}) {
-    this.data = data;
-    this.label = label;
-    this.link = link;
-    this.value = formatHeading(value);
-    this.render();
+    this.data = data
+    this.label = label
+    this.link = link
+    this.value = formatHeading(value)
+    this.render()
   }
 
   get template() {
@@ -32,70 +32,70 @@ export default class ColumnChart {
                 </div>
             </div>
         </div>
-   `;
+   `
   }
 
   render() {
-    const element = document.createElement("div");
-    element.innerHTML = this.template;
+    const element = document.createElement('div')
+    element.innerHTML = this.template
 
-    this.element = element.firstElementChild;
+    this.element = element.firstElementChild
 
     if (this.data.length > 0) {
-      this.element.classList.remove("column-chart_loading");
+      this.element.classList.remove('column-chart_loading')
     }
 
-    this.subElements = this.getSubElements();
+    this.subElements = this.getSubElements()
   }
 
   getSubElements() {
-    const result = {};
-    const elements = this.element.querySelectorAll("[data-element]");
+    const result = {}
+    const elements = this.element.querySelectorAll('[data-element]')
     for (const key of elements) {
-      const name = key.dataset.element;
+      const name = key.dataset.element
 
-      result[name] = key;
+      result[name] = key
     }
-    return result;
+    return result
   }
 
   getColumnBody() {
-    const maxValue = Math.max(...this.data);
-    const scale = this.chartHeight / maxValue;
+    const maxValue = Math.max(...this.data)
+    const scale = this.chartHeight / maxValue
 
     return this.data
       .map((item) => {
-        const percent = ((item / maxValue) * 100).toFixed(0);
+        const percent = ((item / maxValue) * 100).toFixed(0)
 
         return `
                  <div style="--value: ${Math.floor(item * scale)}"
                  data-tooltip="${percent}%"></div>
-                `;
+                `
       })
-      .join("");
+      .join('')
   }
 
   getLink() {
     return this.link
       ? `  <a class="column-chart__link" href="${this.link}">
             View All</a>`
-      : "";
+      : ''
   }
 
   update(data) {
-    this.data = data;
-    this.subElements.body.innerHTML = this.getColumnBody();
+    this.data = data
+    this.subElements.body.innerHTML = this.getColumnBody()
   }
 
   remove() {
     if (this.element) {
-      this.element.remove();
+      this.element.remove()
     }
   }
 
   destroy() {
-    this.remove();
-    this.element = null;
-    this.subElements = {};
+    this.remove()
+    this.element = null
+    this.subElements = {}
   }
 }
