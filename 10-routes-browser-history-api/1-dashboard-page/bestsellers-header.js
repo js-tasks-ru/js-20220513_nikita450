@@ -1,44 +1,46 @@
 const header = [
   {
-    id: 'images',
-    title: 'Image',
+    id: "images",
+    title: "Image",
     sortable: false,
-    template: data => {
+    template: (data) => {
       return `
           <div class="sortable-table__cell">
-            <img class="sortable-table-image" alt="Image" src="${data[0].url}">
+            <img class="sortable-table-image" alt="Image" src="${
+              data.images[0].url || "https://via.placeholder.com/32"
+            }">
           </div>
         `;
-    }
+    },
   },
   {
-    id: 'title',
-    title: 'Name',
+    id: "title",
+    title: "Name",
     sortable: true,
-    sortType: 'string'
+    sortType: "string",
   },
   {
-    id: 'quantity',
-    title: 'Quantity',
+    id: "quantity",
+    title: "Quantity",
     sortable: true,
-    sortType: 'number'
+    sortType: "number",
   },
   {
-    id: 'price',
-    title: 'Price',
+    id: "price",
+    title: "Price",
     sortable: true,
-    sortType: 'number'
+    sortType: "number",
   },
   {
-    id: 'status',
-    title: 'Status',
+    id: "status",
+    title: "Status",
     sortable: true,
-    sortType: 'number',
-    template: data => {
+    sortType: "number",
+    template: (data) => {
       return `<div class="sortable-table__cell">
-          ${data > 0 ? 'Active' : 'Inactive'}
+          ${data > 0 ? "Active" : "Inactive"}
         </div>`;
-    }
+    },
   },
 ];
 

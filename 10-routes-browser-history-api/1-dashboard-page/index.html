@@ -57,15 +57,20 @@
 <script type="module">
   import Page from './index.js';
 
+  const toogleSidebar = document.querySelector('.sidebar__toggler');
+
+  toogleSidebar.addEventListener('click', () => document.body.classList.toggle('is-collapsed-sidebar'));
+
   const contentNode = document.querySelector('#content');
 
-  async function initialize () {
+  async function initialize() {
     const page = new Page();
     const element = await page.render();
 
     contentNode.innerHTML = '';
     contentNode.append(element);
   }
+
 
   initialize();
 </script>
